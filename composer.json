@@ -1,0 +1,13 @@
+{
+    "require": {
+        "aplus/autoload": "^1.7",
+        "smarty/smarty": "^5.4"
+    },
+    "autoload": {
+        "psr-4": {
+            "database\\": "database/",
+            "classes\\": "classes/",
+            "src\\": "src/"
+        }
+    }
+}
