@@ -6,7 +6,10 @@ use database\db;
 use database\MySql;
 
 
-$db = new db();
+if($db = new db())
+{
+    echo "Database connection succeeded";
+}
 
 //composer require smarty/smarty
 $template = new Smarty\Smarty();
@@ -27,9 +30,38 @@ switch ($action)
 
     break;
 
+    //SignUp form
+    case "signupForm";
+    $template->display("templates/signupForm.tpl");
+    break;
+
+    case "signup";
+     if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_GET['action']) && $_GET['action'] === 'signup')
+     {
+         try
+         {       //check if they are not equal
+            if ($_POST['password'] !== $_POST['passwordConfirm'])
+            {
+                throw new Exception("Passwords do not match");
+            }
+             $newuser = new User($_POST['name'], $_POST['email'], $_POST['password']);
+             $newuser->register();
+             echo "User created";
+         }catch (Exception $e)
+         {
+             echo $e->getMessage();
+         }
+
+     }else
+     {
+         $template->assign("message", 'Something went wrong');
+     }
+    break;
 
     default:
         // If no valid action is given, default to home
-        $template->display('templates/layout.tpl');
+        $template->display('templates/home.tpl');
         break;
+
+
 }

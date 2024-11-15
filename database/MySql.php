@@ -22,7 +22,22 @@ public function connect(string $server, string $user, string $password, string $
 }
 public function insert(string $table, $params = [])
 {
-    // TODO: Implement insert() method.
+    try
+    {
+     $columns = implode(', ', array_keys($params));
+     $values = ":" . implode(', :', array_keys($params));
+     $insert = $this->connection->prepare("INSERT INTO $table($columns) VALUES ($values)");
+        foreach ($params as $key => $value) {
+            $insert->bindValue(':' . $key, $value);
+        }
+
+        $insert->execute();
+
+    }
+    catch (Exception $e)
+    {
+        echo "Error!:" . $e->getMessage();
+    }
 }
 public function update(string $table, array $data, array $where = [])
 {

@@ -1,4 +1,4 @@
-
+/* Reset some basic styles */
 * {
     margin: 0;
     padding: 0;
@@ -9,32 +9,22 @@
 body {
     font-family: Arial, sans-serif;
     background-color: #f0f4f8;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
 }
 
-/* Container to center everything */
-.container {
-    text-align: center;
-    width: 100%;
-}
-
-/* Header styling */
+/* Full-width header styling */
 header {
     background-color: #4CAF50;
     color: white;
     padding: 20px 0;
-}
-
-h1 {
-    font-size: 2.5em;
+    text-align: center;
+    width: 100%;   /* Full width */
+    margin: 0;     /* Ensure no margin around it */
 }
 
 /* Main content styling */
 main {
     padding: 20px;
+    text-align: center;
 }
 
 /* Welcome message styling */
