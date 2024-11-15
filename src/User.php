@@ -17,6 +17,10 @@ public function __construct(string $name,  string $email, string $password)
 }
 public function register()
 {
+if($this->checkemail($this->email))
+{
+    throw new \Exception("Email is taken");
+}
 $params =
     [
         'name' => $this->name,
@@ -27,6 +31,17 @@ $params =
     {
        Db::$db->insert('users', $params);
 
+    }
+    catch (\Exception $e)
+    {
+        echo $e->getMessage();
+    }
+}
+public function checkemail($email)
+{
+    try {
+        $result = Db::$db->select('users', ['*'], ['email' => $email]);
+        return !empty($result);
     }
     catch (\Exception $e)
     {

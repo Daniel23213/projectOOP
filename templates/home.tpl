@@ -1,6 +1,6 @@
 {extends file="templates/layout.tpl"}
 
-{block name="content"}
+{block name="signup"}
     <div class="container">
         <header>
             <h1>Welcome to Your Task Manager</h1>

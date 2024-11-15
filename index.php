@@ -47,6 +47,11 @@ switch ($action)
              $newuser = new User($_POST['name'], $_POST['email'], $_POST['password']);
              $newuser->register();
              echo "User created";
+             $_SESSION['user'] = [
+                 'name' => $_POST['name'],
+                 'email' => $_POST['email'],
+                 ];
+             header('templates/home.tpl');
          }catch (Exception $e)
          {
              echo $e->getMessage();
