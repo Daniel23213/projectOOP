@@ -75,6 +75,7 @@ class MySql implements Database
 
             // Fetch and return the results as an associative array
             return $query->fetchAll(PDO::FETCH_ASSOC);
+
         } catch (PDOException $error) {
             throw new Exception($error->getMessage());
         }

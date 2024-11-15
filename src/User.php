@@ -48,4 +48,30 @@ public function checkemail($email)
         echo $e->getMessage();
     }
 }
+    public function login($email, $password)
+    {
+        try {
+            // Fetch the user record based on email
+            $result = Db::$db->select('users', ['name', 'email', 'password'], ['email' => $email]);
+
+            // Ensure $result is not false and contains at least one record
+            if ($result && isset($result[0])) {
+                $user = $result[0]; // Get the first record
+
+                // Verify the password
+                if (password_verify($password, $user['password'])) {
+                    return $user;
+                } else {
+                    echo "Invalid password!";
+                    return false;
+                }
+            } else {
+                echo "User not found!";
+                return false;
+            }
+        } catch (\Exception $e) {
+            echo "Error: " . $e->getMessage();
+            return false;
+        }
+    }
 }
