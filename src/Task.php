@@ -2,7 +2,7 @@
 
 namespace src;
 
-class Task
+class Task extends Workspace
 {
 public function __contruct()
 {

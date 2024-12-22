@@ -23,6 +23,7 @@ if (isset($_GET['action'])) {
     $action = null;
 }
 if (isset($_SESSION['user'])) {
+    $template->assign('username', $_SESSION['user']['id']);
     $template->assign('username', $_SESSION['user']['name']);
     $template->assign('email', $_SESSION['user']['email']);
 } else {
@@ -34,6 +35,7 @@ if (isset($_SESSION['user'])) {
 switch ($action)
 {
     case "home";
+    $template->assign("workspaces", \src\Workspace::getWorkspaces($_SESSION['user']['id']));
     $template->display("templates/home.tpl");
 
     break;
@@ -79,25 +81,27 @@ switch ($action)
             // Attempt to log in and fetch the user data
             $user = $login->login($_POST['email'], $_POST['password']);
 
-            if ($user) {
-                // Set the session with user data
-                $_SESSION['user'] = [
-                    'name' => $user['name'],  // Store the name retrieved from the database
-                    'email' => $user['email'],
-                ];
-var_dump($_SESSION['user']);
+
                 // Assign session data to Smarty template
+                $template->assign('id', $_SESSION['user']['id']);
                 $template->assign('username', $_SESSION['user']['name']);
                 $template->assign('email', $_SESSION['user']['email']);
-               // header("Location: /index.php?action=home");
+                header("Location: /index.php?action=home");
 
 
                 exit;
-            } else {
-                echo "Login failed.";
-            }
+
         }
         break;
+
+        case "logout";
+        session_unset();
+            header("Location: /index.php?action=home");
+        break;
+
+        case "newWorkSpace";
+        $newworkplace = new \src\Workspace($_SESSION['user']['id']);
+        $newworkplace->newWorkPlace();
 
 
 

@@ -52,26 +52,44 @@ public function checkemail($email)
     {
         try {
             // Fetch the user record based on email
-            $result = Db::$db->select('users', ['name', 'email', 'password'], ['email' => $email]);
+            $result = Db::$db->select('users', ['id','name', 'email', 'password'], ['email' => $email]);
 
             // Ensure $result is not false and contains at least one record
             if ($result && isset($result[0])) {
                 $user = $result[0]; // Get the first record
+              if($user)
+              {
+                  $_SESSION['user'] = [
+                      'id'   => $user['id'],
+                      'name' => $user['name'],  // Store the name retrieved from the database
+                      'email' => $user['email'],
+                  ];
+              }
+
 
                 // Verify the password
                 if (password_verify($password, $user['password'])) {
                     return $user;
                 } else {
-                    echo "Invalid password!";
-                    return false;
+                    return ['error' => "Invalid password!"];
+
                 }
             } else {
-                echo "User not found!";
-                return false;
+                return ['error' => "User not found!"];
+
             }
         } catch (\Exception $e) {
             echo "Error: " . $e->getMessage();
             return false;
         }
+
+    }
+
+    /**
+     * @return string
+     */
+    public function Session()
+    {
+
     }
 }
