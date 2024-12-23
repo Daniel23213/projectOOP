@@ -17,13 +17,15 @@ $template = new Smarty\Smarty();
 $template->clearAllCache();
 $template->clearCompiledTemplate();
 
-if (isset($_GET['action'])) {
+if (isset($_GET['action']))
+{
     $action = $_GET['action'];
 } else {
     $action = null;
 }
-if (isset($_SESSION['user'])) {
-    $template->assign('username', $_SESSION['user']['id']);
+if (isset($_SESSION['user']))
+{
+    $template->assign('id', $_SESSION['user']['id']);
     $template->assign('username', $_SESSION['user']['name']);
     $template->assign('email', $_SESSION['user']['email']);
 } else {
@@ -75,7 +77,8 @@ switch ($action)
     break;
 
     case "login":
-        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST')
+        {
             $login = new User('', $_POST['email'], $_POST['password']);
 
             // Attempt to log in and fetch the user data
@@ -98,11 +101,36 @@ switch ($action)
         session_unset();
             header("Location: /index.php?action=home");
         break;
-
+        case "add_workspace";
+        $template->display("templates/add_workspace.tpl");
+        break;
         case "newWorkSpace";
-        $newworkplace = new \src\Workspace($_SESSION['user']['id']);
+            if ($_SERVER['REQUEST_METHOD'] === 'POST')
+            {
+        $newworkplace = new \src\Workspace($_SESSION['user']['id'], $_POST["name"]);
         $newworkplace->newWorkPlace();
+            }else
+            {
+                return "Something went wrong!";
+            }
+            header("Location: /index.php?action=home");
+            break;
+    case "workspace":
+        if (!empty($_GET['name'] && $_SESSION['user']['id'])) {
+            $workspace = \src\Workspace::getWorkSpaceByName($_GET['name'], $_SESSION['user']['id']);
+            if ($workspace !== null) {
+                $template->assign('workspace', $workspace);
+                $template->assign('tasks', \src\Task::getTasks($_GET['name']));
+                $template->assign('status', \src\Status::getStatus());
 
+            } else {
+                echo "Workspace not found or invalid.";
+            }
+        } else {
+            echo "No workspace name provided.";
+        }
+        $template->display("templates/Workspace.tpl");
+        break;
 
 
 

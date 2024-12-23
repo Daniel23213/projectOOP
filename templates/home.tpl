@@ -13,10 +13,10 @@
                 {if isset($workspaces) && is_array($workspaces)}
                     {foreach $workspaces as $workspace}
                     <h1>Workspace</h1>
-                        <button>SS</button>
+                        <a href="index.php?action=workspace&name={$workspace['name']}&{$id}" class="btn-login">{$workspace['name']}</a>
                     {/foreach}
                     {/if}
-                    <a href="index.php?action=newWorkSpace" class="btn-login">Make a new workspace</a>
+                    <a href="index.php?action=add_workspace" class="btn-login">Make a new workspace</a>
                     <a href="index.php?action=logout" class="btn-login">Logout</a>
                 {else}
                     <h1>Welcome to our website!</h1>

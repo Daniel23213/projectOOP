@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 5.4.2, created on 2024-12-22 19:56:58
+/* Smarty version 5.4.2, created on 2024-12-23 18:26:28
   from 'file:templates/layout.tpl' */
 
 /* @var \Smarty\Template $_smarty_tpl */
 if ($_smarty_tpl->getCompiled()->isFresh($_smarty_tpl, array (
   'version' => '5.4.2',
-  'unifunc' => 'content_67686f0acd1271_97388299',
+  'unifunc' => 'content_6769ab54c4a584_44085216',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'ec52bcd1048ba36d9819fc9f6bb3beb5c7122858' => 
     array (
       0 => 'templates/layout.tpl',
-      1 => 1734788503,
+      1 => 1734906103,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->getCompiled()->isFresh($_smarty_tpl, array (
   array (
   ),
 ))) {
-function content_67686f0acd1271_97388299 (\Smarty\Template $_smarty_tpl) {
+function content_6769ab54c4a584_44085216 (\Smarty\Template $_smarty_tpl) {
 $_smarty_current_dir = 'C:\\wamp64\\www\\projectOOP\\templates';
 $_smarty_tpl->getInheritance()->init($_smarty_tpl, false);
 ?>
@@ -31,19 +31,22 @@ $_smarty_tpl->getInheritance()->init($_smarty_tpl, false);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Task Website</title>
     <link rel="stylesheet" href="/templates/style.css">
+    <?php echo '<script'; ?>
+ src="/templates/script.js"><?php echo '</script'; ?>
+>
 </head>
 <body>
 <main>
     <?php 
-$_smarty_tpl->getInheritance()->instanceBlock($_smarty_tpl, 'Block_166083538967686f0accb016_16544406', "signup");
+$_smarty_tpl->getInheritance()->instanceBlock($_smarty_tpl, 'Block_18259889846769ab54c47083_97968481', "signup");
 ?>
 
     <?php 
-$_smarty_tpl->getInheritance()->instanceBlock($_smarty_tpl, 'Block_202143075067686f0acce7a0_64072890', "content");
+$_smarty_tpl->getInheritance()->instanceBlock($_smarty_tpl, 'Block_11238560786769ab54c48616_71210985', "content");
 ?>
 
     <?php 
-$_smarty_tpl->getInheritance()->instanceBlock($_smarty_tpl, 'Block_98123857367686f0acd01f0_87992008', "contact");
+$_smarty_tpl->getInheritance()->instanceBlock($_smarty_tpl, 'Block_10646091996769ab54c498c2_85162847', "contact");
 ?>
 
 </main>
@@ -51,7 +54,7 @@ $_smarty_tpl->getInheritance()->instanceBlock($_smarty_tpl, 'Block_9812385736768
 </html>
 <?php }
 /* {block "signup"} */
-class Block_166083538967686f0accb016_16544406 extends \Smarty\Runtime\Block
+class Block_18259889846769ab54c47083_97968481 extends \Smarty\Runtime\Block
 {
 public function callBlock(\Smarty\Template $_smarty_tpl) {
 $_smarty_current_dir = 'C:\\wamp64\\www\\projectOOP\\templates';
@@ -59,7 +62,7 @@ $_smarty_current_dir = 'C:\\wamp64\\www\\projectOOP\\templates';
 }
 /* {/block "signup"} */
 /* {block "content"} */
-class Block_202143075067686f0acce7a0_64072890 extends \Smarty\Runtime\Block
+class Block_11238560786769ab54c48616_71210985 extends \Smarty\Runtime\Block
 {
 public function callBlock(\Smarty\Template $_smarty_tpl) {
 $_smarty_current_dir = 'C:\\wamp64\\www\\projectOOP\\templates';
@@ -67,7 +70,7 @@ $_smarty_current_dir = 'C:\\wamp64\\www\\projectOOP\\templates';
 }
 /* {/block "content"} */
 /* {block "contact"} */
-class Block_98123857367686f0acd01f0_87992008 extends \Smarty\Runtime\Block
+class Block_10646091996769ab54c498c2_85162847 extends \Smarty\Runtime\Block
 {
 public function callBlock(\Smarty\Template $_smarty_tpl) {
 $_smarty_current_dir = 'C:\\wamp64\\www\\projectOOP\\templates';

@@ -10,11 +10,13 @@ class Workspace
     private $status;
     private static array $workspaces = [];
 
-    private $userid;
+    private  int $userid;
+    protected string $name;
 
-    public function __construct( string $userid ,)
+    public function __construct( int $userid ,string $name)
     {
         $this->userid = $userid;
+        $this->name = $name;
         self::$workspaces[] = $this;
     }
 
@@ -23,6 +25,7 @@ class Workspace
         $params =
             [
                 'users_id' => $this->userid,
+                'name' =>  $this->name
             ];
         try {
             Db::$db->insert('wokspace', $params);
@@ -33,21 +36,49 @@ class Workspace
     public static function getWorkspaces($userid): array
     {
         try {
-            // Fetch games from the database with the genre "Game"
-            $workspaces = Db::$db->select('wokspace', ["id"], ["users_id" => $userid]);
+
+            $workspaces = Db::$db->select('wokspace', ["id", "name"], ["users_id" => $userid]);
 
             if (!empty($workspaces)) {
-                // Debugging output
+
 
                 return $workspaces;
             } else {
-                return []; // Return an empty array if no games are found
+                return [];
             }
         } catch (\Exception $e) {
             echo "Error retrieving games: " . $e->getMessage();
             return []; // Return an empty array in case of an exception
         }
     }
+    public static function getWorkSpaceByName($name, $userid)
+    {
+        foreach (self::$workspaces as $workspace)
+        {
+            if ($workspace->getName() === $name)
+            {
+                return $workspace;
+            }
+        }
 
+        // If no game is found in the array, fetch from the database
+        $result = Db::$db->select('wokspace', ['name', 'users_id'], ['name' => $name, 'users_id' => $userid]);
+
+        if (!empty($result)) {
+            // Create and return a new Workspace object based on the database result
+            return new Workspace($result[0]['users_id'], $result[0]['name']);
+        }
+
+        // Return null if no workspace is found
+        return null;
+    }
+
+    /**
+     * @return string
+     */
+    public function getName(): string
+    {
+        return $this->name;
+    }
 
 }
